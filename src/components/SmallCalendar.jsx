@@ -15,7 +15,7 @@ const SmallCalendar = () => {
         setCurrentMonth(getMonth(currentMonthIdx));
     }, [currentMonthIdx]);
 
-    const {monthIndex} = useContext(GlobalContext);
+    const {monthIndex,setSmallCalendarMonth,daySelected,setDaySelected} = useContext(GlobalContext);
 
     useEffect(() => {
         setCurrentMonthIdx(monthIndex);
@@ -29,10 +29,18 @@ const SmallCalendar = () => {
         setCurrentMonthIdx(currentMonthIdx + 1);
     }
 
-    const getCurrentDayClass = (day) => {
-        return day.format('DD-MM-YY') === dayjs().format('DD-MM-YY')
-        ? 'bg-blue-600 text-white rounded-full w-7'
-        : ''
+    const getDayClass = (day) => {
+        const format = "DD-MM-YY";
+        const nowDay = dayjs().format(format);
+        const currDay = day.format(format);
+        const slcDay = daySelected && daySelected.format(format);
+        if(nowDay === currDay){
+            return "bg-blue-500 text-white rounded-full";
+        } else if (currDay === slcDay){
+            return "bg-blue-100 text-blue-600 rounded-full font-bold";
+        } else{
+            return ""
+        }
     }
 
   return (
@@ -59,7 +67,11 @@ const SmallCalendar = () => {
                     {row.map((day, idx) => (
                     <button
                         key={idx}
-                        className={`py-1 w-full ${getCurrentDayClass(day)}`}
+                        onClick={() => {
+                            setSmallCalendarMonth(currentMonthIdx);
+                            setDaySelected(day);
+                        }}
+                        className={`py-1 w-full ${getDayClass(day)}`}
                     >
                         <span className='text-sm'>{day.format("D")}</span>
                     </button>

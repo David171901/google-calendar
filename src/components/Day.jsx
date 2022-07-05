@@ -4,7 +4,7 @@ import GlobalContext from '../context/ContextWrapper'
 
 const Day = ({ day,rowIdx }) => {
 
-    const {monthIndex} = useContext(GlobalContext);
+    const {monthIndex,setDaySelected,setShowEventModal} = useContext(GlobalContext);
 
     const getCurrentDayClass = () => {
         return day.format('DD-MM-YY') === dayjs().format('DD-MM-YY')
@@ -19,7 +19,11 @@ const Day = ({ day,rowIdx }) => {
     }
 
   return (
-    <div className='border border-gray-200 flex flex-col'>
+    <div className='border border-gray-200 flex flex-col'
+    onClick={()=>{
+        setDaySelected(day);
+        setShowEventModal(true);
+    }}>
         <header className='flex flex-col items-center'>
             {rowIdx === 0 && (
                 <p className='text-sm mt-1'>{day.format("ddd").toUpperCase()}</p>
