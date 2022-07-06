@@ -7,7 +7,7 @@ import CalendarHeader from './components/CalendarHeader';
 import Sidebar from './components/Sidebar';
 import Month from './components/Month';
 // CONTEXT
-import GlobalContext from './context/ContextWrapper';
+import GlobalContext from "./context/GlobalContext";
 import EventModal from './components/EventModal';
 
 function App() {

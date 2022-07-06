@@ -3,7 +3,7 @@ import React,{useContext} from 'react'
 // ICONS
 import {AiOutlineLeft,AiOutlineRight} from 'react-icons/ai'
 // CONTEXT
-import GlobalContext from '../context/ContextWrapper'
+import GlobalContext from "../context/GlobalContext";
 
 const CalendarHeader = () => {
 

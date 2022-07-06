@@ -1,6 +1,6 @@
 import React,{useContext} from 'react'
 // CONTEXT
-import GlobalContext from '../context/ContextWrapper';
+import GlobalContext from "../context/GlobalContext";
 
 const CreateEventButton = () => {
 

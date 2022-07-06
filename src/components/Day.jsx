@@ -1,11 +1,20 @@
 import dayjs from 'dayjs'
-import React,{useContext} from 'react'
-import GlobalContext from '../context/ContextWrapper'
+import React,{useContext, useEffect,useState} from 'react'
+import GlobalContext from "../context/GlobalContext";
 
 const Day = ({ day,rowIdx }) => {
 
-    const {monthIndex,setDaySelected,setShowEventModal} = useContext(GlobalContext);
+    const [dayEvents, setDayEvents] = useState([]);
+    const {monthIndex,setDaySelected,setShowEventModal,savedEvents} = useContext(GlobalContext);
 
+    useEffect(() => {
+        const events = savedEvents.filter(
+            (evt) =>
+              dayjs(evt.day).format("DD-MM-YY") === day.format("DD-MM-YY")
+          );
+          setDayEvents(events);
+    }, [savedEvents,day]);
+    
     const getCurrentDayClass = () => {
         return day.format('DD-MM-YY') === dayjs().format('DD-MM-YY')
         ? 'bg-blue-600 text-white rounded-full w-7'
@@ -32,6 +41,14 @@ const Day = ({ day,rowIdx }) => {
                 {day.format("DD")}
             </p>
         </header>
+        {dayEvents.map((evt,idx) => (
+            <div
+            key={idx}
+            className={`bg-${evt.label} p-1 mr-3 text-gray-600 text-sm rounded mb-1 truncate`}
+            >
+                {evt.title}
+            </div>                
+        ))}
     </div>
   )
 }

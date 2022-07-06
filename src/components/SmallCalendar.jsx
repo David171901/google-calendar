@@ -4,7 +4,7 @@ import { getMonth } from '../util';
 // ICONS
 import {AiOutlineLeft,AiOutlineRight} from 'react-icons/ai'
 // CONTEXT
-import GlobalContext from '../context/ContextWrapper'
+import GlobalContext from "../context/GlobalContext";
 
 const SmallCalendar = () => {
 
